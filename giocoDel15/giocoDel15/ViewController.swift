@@ -20,17 +20,43 @@ class ViewController: UIViewController {
     let numeriOrdinati = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
     
     
-    func inserisciNumeri()->Int{
+    func inserisciNumeri(){
         //Finche l'array non è piena continuo a inserire i numeri
-        var contatore = 0
-        while contatore < array.count{
-            array[contatore] = Int(arc4random_uniform(15)+1)
-            //controlla se il numero è valido per lalgoritmo dei 15 
-            contatore += 1
+        var pos = 0
+        var appoggio = 0
+        
+        for pos_ in 1...15{
+            appoggio = pos
+            pos = Int(arc4random_uniform(15))
+            switch appoggio {
+            case pos :
+                pos = Int(arc4random_uniform(15))
+            default:
+                array[pos] = pos_
+            }
         }
-        return 0
+        controllaSeRisolvibile()
     }
     
+    func controllaSeRisolvibile(){
+        var N : [Int] = []
+        var N_ : Int = 0
+        
+        for pos in 0...15{
+            for posizioneInv in 15...0{
+                if array[posizioneInv]<array[pos]{
+                    N[pos] += 1
+                }
+            }
+        }
+        
+        for pos_ in 0...Int(N.count){
+            N_ += N[pos_]
+        }
+        if Double(N_%2) > 0{
+            inserisciNumeri()
+        }
+    }
     
     //Funzione per controllare se hai finito la partita
     func finisciPartita()->Bool{
@@ -40,9 +66,6 @@ class ViewController: UIViewController {
         }else{
             return false
         }
-        
     }
-    
-
 }
 
