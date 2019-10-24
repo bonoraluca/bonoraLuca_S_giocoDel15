@@ -22,8 +22,11 @@ class ViewController: UIViewController {
     
     func inserisciNumeri()->Int{
         //Finche l'array non è piena continuo a inserire i numeri
-        while array.count < 14{
-            
+        var contatore = 0
+        while contatore < array.count{
+            array[contatore] = Int(arc4random_uniform(15)+1)
+            //controlla se il numero è valido per lalgoritmo dei 15 
+            contatore += 1
         }
         return 0
     }
