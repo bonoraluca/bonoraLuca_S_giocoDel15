@@ -16,48 +16,23 @@ class ViewController: UIViewController {
     }
     
     //Variabili globali
-    var array : [Int] = []
-    let numeriOrdinati = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    var array = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
+    let numeriOrdinati = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
     
-    //Funzione per inserire i numeri
-    func inserisciNumeri(){
-        //Finche l'array non è piena continuo a inserire i numeri
-        var pos = 0
-        var appoggio = 0
+    //Funzione per mischiare i numeri nella matrice
+    func mischiaNumeri(difficolta:Int)->[Int]{
         
-        for pos_ in 1...15{
-            appoggio = pos
-            pos = Int(arc4random_uniform(15))
-            switch appoggio {
-            case pos :
-                pos = Int(arc4random_uniform(15))
-            default:
-                array[pos] = pos_
+        let possibileSpostamento = [-4,+4,-1,+1]
+        var spostamento = possibileSpostamento.randomElement()
+        
+        for _ in 0...difficolta{
+            let pos = array.firstIndex(of: 0)
+            while !((0...16).contains(pos!+spostamento!)){
+                spostamento = possibileSpostamento.randomElement()
             }
+            array.swapAt(pos!, pos!+spostamento!)
         }
-        controllaSeRisolvibile()
-    }
-    
-    //Funzione per controllare se è risolvibile il gioco
-    func controllaSeRisolvibile(){
-        var N : [Int] = []
-        var N_ : Int = 0
-        
-        for pos in 0...15{
-            for posizioneInv in 15...0{
-                if array[posizioneInv]<array[pos]{
-                    N[pos] += 1
-                }
-            }
-        }
-        
-        for pos_ in 0...Int(N.count){
-            N_ += N[pos_]
-        }
-        
-        if Double(N_%2) > 0{
-            inserisciNumeri()
-        }
+        return array
     }
     
     //Funzione per controllare se hai finito la partita
