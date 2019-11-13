@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         
         for _ in 0...difficolta{
             let pos = array.firstIndex(of: 0)
-            while !((0...16).contains(pos!+spostamento!)){
+            while !((0...15).contains(pos!+spostamento!)){
                 spostamento = possibileSpostamento.randomElement()
             }
             array.swapAt(pos!, pos!+spostamento!)
