@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  giocoDel15
+//  15Game
 //
-//  Created by LUCA BONORA on 23/10/2019.
+//  Created by LUCA BONORA on 22/11/2019.
 //  Copyright © 2019 LUCA BONORA. All rights reserved.
 //
 
