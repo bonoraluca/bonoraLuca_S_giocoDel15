@@ -10,12 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var btn_0: UIButton!
-    
+    @IBOutlet var bottoni: [UIButton]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        array = mischiaNumeri(difficolta: Int(1))
+        inserisciMatriceGraficamente()
+        sblocca()
     }
     
     //Variabili globali
@@ -48,13 +50,58 @@ class ViewController: UIViewController {
         }
     }
     
+    //Funzione per inserire i numeri graficamente
     func inserisciMatriceGraficamente(){
-        var nomeButton : String
-        for i in 0...15{
-            nomeButton = "btn_" + String(i)
-            //nomeButton.setTitle
+        for i in 0...bottoni!.count-1{
+            switch array[i] {
+            case 0:
+                bottoni[i].setTitle("", for: .normal)
+            default:
+                bottoni[i].setTitle(String(array[i]), for: .normal)
+            }
+            
+        }
+        
+    }
+    
+    
+    func blocca(){
+        for i in 0...bottoni.count-1{
+            bottoni[i].isUserInteractionEnabled = false
         }
     }
-
+    
+    func sblocca(){
+        for i in 0...bottoni.count-1{
+            bottoni[i].isUserInteractionEnabled = false
+        }
+    }
+    
+    
+    
+    @IBAction func spostaNumero(_ sender: UIButton) {
+        let posZero = array.firstIndex(of: 0)
+        let pos = bottoni.firstIndex(of: sender)
+        var eFinita : Bool
+        switch pos {
+        case posZero!+1,posZero!-1,posZero!+4,posZero!-4:
+            array.swapAt(posZero!, pos!)
+            eFinita = finisciPartita()
+        default:
+            eFinita = finisciPartita()
+        }
+        if eFinita == true{
+            blocca()
+        }
+        inserisciMatriceGraficamente()
+    }
+    //DAFINIRE
+    @IBAction func nuovaPartita(_ sender: Any) {
+        array = mischiaNumeri(difficolta: 1)
+        inserisciMatriceGraficamente()
+        sblocca()
+    }
+    
+    
 }
 
