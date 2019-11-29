@@ -11,11 +11,13 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var bottoni: [UIButton]!
+    @IBOutlet weak var stp_difficolta: UIStepper!
+    @IBOutlet weak var lbl_difficolta: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        array = mischiaNumeri(difficolta: Int(1))
+        array = mischiaNumeri(difficolta: difficolta)
         inserisciMatriceGraficamente()
         sblocca()
     }
@@ -23,6 +25,7 @@ class ViewController: UIViewController {
     //Variabili globali
     var array = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
     let numeriOrdinati = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
+    var difficolta = 0
     
     //Funzione per mischiare i numeri nella matrice
     func mischiaNumeri(difficolta:Int)->[Int]{
@@ -65,6 +68,7 @@ class ViewController: UIViewController {
     }
     
     
+    
     func blocca(){
         for i in 0...bottoni.count-1{
             bottoni[i].isUserInteractionEnabled = false
@@ -74,6 +78,24 @@ class ViewController: UIViewController {
     func sblocca(){
         for i in 0...bottoni.count-1{
             bottoni[i].isUserInteractionEnabled = false
+        }
+    }
+    
+    func stepperDifficolta(){
+        stp_difficolta.minimumValue = 1
+        stp_difficolta.maximumValue = 3
+        switch stp_difficolta.value {
+        case 1:
+            lbl_difficolta.text = "Difficoltà: Facile"
+            difficolta = Int(stp_difficolta.value * 10)
+        case 2:
+            lbl_difficolta.text = "DIfficoltà: Media"
+            difficolta = Int(stp_difficolta.value * 10)
+        case 3:
+            lbl_difficolta.text = "Difficoltà: Difficile"
+            difficolta = Int(stp_difficolta.value * 10)
+        default:
+            lbl_difficolta.text = "Difficoltà: Facile"
         }
     }
     
@@ -95,9 +117,9 @@ class ViewController: UIViewController {
         }
         inserisciMatriceGraficamente()
     }
-    //DAFINIRE
+    
     @IBAction func nuovaPartita(_ sender: Any) {
-        array = mischiaNumeri(difficolta: 1)
+        array = mischiaNumeri(difficolta: difficolta)
         inserisciMatriceGraficamente()
         sblocca()
     }
