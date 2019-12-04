@@ -13,13 +13,13 @@ class ViewController: UIViewController {
     @IBOutlet var bottoni: [UIButton]!
     @IBOutlet weak var stp_difficolta: UIStepper!
     @IBOutlet weak var lbl_difficolta: UILabel!
+    @IBOutlet weak var btn_nuovaPartita: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        array = mischiaNumeri(difficolta: difficolta)
-        inserisciMatriceGraficamente()
-        sblocca()
+        blocca()
+        nuovaPartita(btn_nuovaPartita)
     }
     
     //Variabili globali
@@ -77,7 +77,7 @@ class ViewController: UIViewController {
     
     func sblocca(){
         for i in 0...bottoni.count-1{
-            bottoni[i].isUserInteractionEnabled = false
+            bottoni[i].isUserInteractionEnabled = true
         }
     }
     
@@ -97,6 +97,7 @@ class ViewController: UIViewController {
         default:
             lbl_difficolta.text = "Difficoltà: Facile"
         }
+        
     }
     
     
@@ -118,7 +119,8 @@ class ViewController: UIViewController {
         inserisciMatriceGraficamente()
     }
     
-    @IBAction func nuovaPartita(_ sender: Any) {
+    @IBAction func nuovaPartita(_ sender: UIButton) {
+        stepperDifficolta()
         array = mischiaNumeri(difficolta: difficolta)
         inserisciMatriceGraficamente()
         sblocca()
