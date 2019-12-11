@@ -107,12 +107,33 @@ class ViewController: UIViewController {
         let pos = bottoni.firstIndex(of: sender)
         var eFinita : Bool
         switch pos {
-        case posZero!+1,posZero!-1,posZero!+4,posZero!-4:
-            array.swapAt(posZero!, pos!)
-            eFinita = finisciPartita()
+        case 3,7,11:
+            switch pos {
+            case posZero!+4,posZero!-4,posZero!+1:
+                array.swapAt(posZero!, pos!)
+                eFinita = finisciPartita()
+            default:
+                eFinita = finisciPartita()
+            }
+        case 4,8,12:
+            switch pos {
+            case posZero!+4,posZero!-4,posZero!-1:
+                array.swapAt(posZero!, pos!)
+                eFinita = finisciPartita()
+            default:
+                eFinita = finisciPartita()
+            }
+            
         default:
-            eFinita = finisciPartita()
+            switch pos {
+            case posZero!+1,posZero!-1,posZero!+4,posZero!-4:
+                array.swapAt(posZero!, pos!)
+                eFinita = finisciPartita()
+            default:
+                eFinita = finisciPartita()
+            }
         }
+        
         if eFinita == true{
             blocca()
         }
