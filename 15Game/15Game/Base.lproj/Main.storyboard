@@ -146,15 +146,10 @@
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="54s-1S-H4I">
                                 <rect key="frame" x="244" y="790" width="94" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </stepper>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuZ-3S-9Wx">
-                                <rect key="frame" x="161" y="684" width="93" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Nuova Partita"/>
                                 <connections>
-                                    <action selector="nuovaPartita:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TpS-oM-fhd"/>
+                                    <action selector="stepperDifficolta" destination="BYZ-38-t0r" eventType="valueChanged" id="Igf-8X-d4q"/>
                                 </connections>
-                            </button>
+                            </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Difficoltà: Facile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTn-uU-C4S">
                                 <rect key="frame" x="67" y="796" width="157" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -167,7 +162,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="btn_nuovaPartita" destination="nuZ-3S-9Wx" id="fTj-dN-rok"/>
                         <outlet property="lbl_difficolta" destination="oTn-uU-C4S" id="VYY-c7-jEL"/>
                         <outlet property="stp_difficolta" destination="54s-1S-H4I" id="Whi-aS-5TB"/>
                         <outletCollection property="bottoni" destination="ORo-a5-sYA" collectionClass="NSMutableArray" id="cxZ-e3-NUq"/>

@@ -13,13 +13,12 @@ class ViewController: UIViewController {
     @IBOutlet var bottoni: [UIButton]!
     @IBOutlet weak var stp_difficolta: UIStepper!
     @IBOutlet weak var lbl_difficolta: UILabel!
-    @IBOutlet weak var btn_nuovaPartita: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         blocca()
-        nuovaPartita(btn_nuovaPartita)
+        nuovaPartita((Any).self)
     }
     
     //Variabili globali
@@ -45,8 +44,14 @@ class ViewController: UIViewController {
     
     //Funzione per controllare se hai finito la partita
     func finisciPartita()->Bool{
+        let alert = UIAlertController(title: "HAI VINTO", message: nil, preferredStyle: .actionSheet)
+        
+        let azione = UIAlertAction(title: "NUOVA PARTITA", style: .default, handler: self.nuovaPartita(_:))
+        
+        alert.addAction(azione)
         
         if  array == numeriOrdinati{
+            self.present(alert, animated: true)
             return true
         }else{
             return false
@@ -81,22 +86,24 @@ class ViewController: UIViewController {
         }
     }
     
-    func stepperDifficolta(){
+    @IBAction func stepperDifficolta(){
+        var diff = ""
         stp_difficolta.minimumValue = 1
         stp_difficolta.maximumValue = 3
         switch stp_difficolta.value {
         case 1:
-            lbl_difficolta.text = "Difficoltà: Facile"
+            diff = "Difficoltà: Facile"
             difficolta = Int(stp_difficolta.value * 10)
         case 2:
-            lbl_difficolta.text = "DIfficoltà: Media"
+            diff = "DIfficoltà: Media"
             difficolta = Int(stp_difficolta.value * 10)
         case 3:
-            lbl_difficolta.text = "Difficoltà: Difficile"
+            diff = "Difficoltà: Difficile"
             difficolta = Int(stp_difficolta.value * 10)
         default:
-            lbl_difficolta.text = "Difficoltà: Facile"
+            diff = "Difficoltà: Facile"
         }
+        lbl_difficolta.text = diff
         
     }
     
@@ -140,7 +147,7 @@ class ViewController: UIViewController {
         inserisciMatriceGraficamente()
     }
     
-    @IBAction func nuovaPartita(_ sender: UIButton) {
+    func nuovaPartita(_ sender: Any) {
         stepperDifficolta()
         array = mischiaNumeri(difficolta: difficolta)
         inserisciMatriceGraficamente()
