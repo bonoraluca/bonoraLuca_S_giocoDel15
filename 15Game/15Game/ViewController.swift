@@ -33,14 +33,28 @@ class ViewController: UIViewController {
         var spostamento = possibileSpostamento.randomElement()
         
         for _ in 0...difficolta{
+            spostamento = possibileSpostamento.randomElement()
             let pos = array.firstIndex(of: 0)
             while !((0...15).contains(pos!+spostamento!)){
-                spostamento = possibileSpostamento.randomElement()
+                switch pos {
+                    case 3,7,11:
+                        while spostamento! == 1{
+                            spostamento = possibileSpostamento.randomElement()
+                    }
+                    case 4,8,12:
+                        while spostamento! == -1{
+                            spostamento = possibileSpostamento.randomElement()
+                    }
+                    default:
+                        if (0...15).contains(pos!+spostamento!){
+                            array.swapAt(pos!, pos!+spostamento!)
+                    }
             }
-            array.swapAt(pos!, pos!+spostamento!)
         }
-        return array
+            array.swapAt(pos!, pos!+spostamento!)
     }
+        return array
+}
     
     //Funzione per controllare se hai finito la partita
     func finisciPartita()->Bool{
