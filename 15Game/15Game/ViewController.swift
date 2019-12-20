@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     func mischiaNumeri(difficolta:Int)->[Int]{
         
         let possibileSpostamento = [-4,+4,-1,+1]
-        var spostamento = possibileSpostamento.randomElement()
+        var spostamento : Int!
         
         for _ in 0...difficolta{
             spostamento = possibileSpostamento.randomElement()
@@ -45,10 +45,8 @@ class ViewController: UIViewController {
                         while spostamento! == -1{
                             spostamento = possibileSpostamento.randomElement()
                     }
-                    default:
-                        if (0...15).contains(pos!+spostamento!){
-                            array.swapAt(pos!, pos!+spostamento!)
-                    }
+                    default: break
+                    
             }
         }
             array.swapAt(pos!, pos!+spostamento!)
