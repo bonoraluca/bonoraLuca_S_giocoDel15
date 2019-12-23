@@ -30,26 +30,24 @@ class ViewController: UIViewController {
     func mischiaNumeri(difficolta:Int)->[Int]{
         
         let possibileSpostamento = [-4,+4,-1,+1]
+	   let possibileSpostamentoNoPiuUno = [-4,+4,-1]
+	   let possibileSpostamentoNoMenoUno = [-4,+4,+1]
         var spostamento : Int!
         
         for _ in 0...difficolta{
             spostamento = possibileSpostamento.randomElement()
             let pos = array.firstIndex(of: 0)
             while !((0...15).contains(pos!+spostamento!)){
-                switch pos {
-                    case 3,7,11:
-                        while spostamento! == 1{
-                            spostamento = possibileSpostamento.randomElement()
-                    }
-                    case 4,8,12:
-                        while spostamento! == -1{
-                            spostamento = possibileSpostamento.randomElement()
-                    }
-                    default: break
-                    
-            }
-        }
-            array.swapAt(pos!, pos!+spostamento!)
+                switch pos{
+				case 3,7,11:
+					spostamento=possibileSpostamentoNoPiuUno.randomElement()
+				case 4,8,12:
+					spostamento=possibileSpostamentoNoMenoUno.randomElement()
+				default:
+					spostamento=possibileSpostamento.randomElement()
+					}
+			}
+	array.swapAt(pos!,pos!+spostamento!)
     }
         return array
 }
